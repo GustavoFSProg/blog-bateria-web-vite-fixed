@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../Components/Header";
 import api from "../api";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import { Link, useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   display: flex;
@@ -81,8 +82,25 @@ const BodyContainer = styled.div`
 
 function PostProfile() {
   const [post, setPost] = useState({});
+  const [likes, setLikes] = useState(false);
 
   const id = localStorage.getItem("ID");
+
+  async function UpdateLikes() {
+    try {
+      await api.put(`/likes/${id}`);
+
+      // navigate("/profile");
+
+      setLikes(true);
+
+      // window.location.reload();
+
+      return null;
+    } catch (error) {
+      return alert(error);
+    }
+  }
 
   async function GetOnePost() {
     try {
@@ -167,17 +185,34 @@ function PostProfile() {
                         justifyContent: "center",
                         // background: "yellow",
                         // marginLeft: "-55px",
+                        cursor: "pointer",
                       }}
                     >
-                      <ThumbUpAltIcon />
-                      <span
-                        style={{
-                          marginLeft: "7px",
-                          fontSize: "21px",
-                        }}
-                      >
-                        {post.likes}
-                      </span>
+                      {likes === true ? (
+                        <button disabled="true" onClick={() => UpdateLikes()}>
+                          <ThumbUpAltIcon />
+                          <span
+                            style={{
+                              marginLeft: "7px",
+                              fontSize: "21px",
+                            }}
+                          >
+                            {post.likes}
+                          </span>
+                        </button>
+                      ) : (
+                        <button onClick={() => UpdateLikes()}>
+                          <ThumbUpAltIcon />
+                          <span
+                            style={{
+                              marginLeft: "7px",
+                              fontSize: "21px",
+                            }}
+                          >
+                            {post.likes}
+                          </span>
+                        </button>
+                      )}
                     </div>
                   </p>
 
