@@ -108,7 +108,7 @@ function PostProfile() {
     <>
       <Header />
       <ContainerGeral>
-        <h1 style={{ color: "lightgray" }}>BLOG SOBRE BATERIA</h1>
+        <h1 style={{ color: "lightgray" }}>BLOG SOBRE BATERIA E TI</h1>
         <BodyContainer>
           <ContainerCards>
             <Card>
