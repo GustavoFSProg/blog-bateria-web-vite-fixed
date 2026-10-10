@@ -1,0 +1,1 @@
+# blog-bateria-web-vite-fixed
